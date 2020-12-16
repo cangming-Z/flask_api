@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+<h1>请登录</h1>
+<form class="fm">
+    <input id="user" type="text" name="user" placeholder="请输入用户名">
+    <input id="pwd" type="password" name="pwd" placeholder="请输入密码">
+ 
+    <input class="sbm" type="submit" value="提交...">
+</form>
+</body>
+<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(function () {
+ 
+    // form表单请求: 完成前后台数据交互,
+    //      为后台提供数据, 后台反馈响应结果, 前台会发生页面转跳
+    $('.fm').submit(function () { return false; })
+ 
+    // ajax请求: 完成前后台数据交互,
+    //      为后台提供数据, 后台反馈响应结果, 前台不需要页面转跳,
+    //      可以完成页面局部刷新内容
+    $('.sbm').click(function () {
+        // 前提: 准备发送的数据
+        var user = $('#user').val();
+        var pwd = $('#pwd').val();
+ 
+ 
+        // 1.通过ajax发生请求, 获得后台响应的结果
+        // 2.用得到的结果来局部渲染页面内容
+ 
+        // 1.
+        $.ajax({
+            url: "http://127.0.0.1:5000/login",
+            data: {
+                user: user,
+                pwd: pwd
+            },
+            success: function (data) {
+                // 2.
+                doSomething(data);
+            }
+        })
+    });
+ 
+    function doSomething(data) {
+        // console.log(data)
+        $('h1').text(data)
+    }
+})
+</script>
+</html>
