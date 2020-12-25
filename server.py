@@ -7,6 +7,7 @@ from Utility import main_path
 from Utility.db_helper import Database
 from Utility.logger import Logger
 from selenium import webdriver
+from flask import render_template
 # 解决ajax请求的跨域问题
 from flask_cors import CORS
 
@@ -22,7 +23,7 @@ CORS(app, supports_credentials=True)
 # 设置一个主页路由, 对应一个处理主页的功能方法, 返回主页信息
 @app.route('/')
 def home_action():
-    return '<h1 style="color: red">主页</h1>'
+    return render_template('测试ajax.html')
 
 
 # 为ajax登录请求配置一个处理登录的功能
@@ -89,4 +90,5 @@ def login_action():
 
 # 启动服务(该文件作为自启文件)
 if __name__ == '__main__':
-    app.run(port="8888")
+    app.run(debug=True)
+    # app.run(port="8888")
